@@ -13,7 +13,6 @@ public class TestTitlePage {
 
     @BeforeEach
     public void before() {
-        //System.setProperty("webdriver.chrome.driver", "C:\\Users\\mamee\\Downloads\\chromedriver.exe"); // укажите путь к chromedriver.exe
         WebDriverManager.chromedriver().setup();
         ChromeOptions option = new ChromeOptions();
         option.addArguments("--incognito");
@@ -24,10 +23,10 @@ public class TestTitlePage {
 
     @AfterEach
     public void endTest() {
-        //driver.quit();
+        driver.quit();
     }
     @ParameterizedTest
-    @CsvSource({"Москва , улица Павла Корчагина , 3, 1, 1, 1, 1, Можно передать через окно",})  // укажи тестовые города
+    @CsvSource({"Москва , улица Павла Корчагина , 3, 1, 1, 1, 1, Можно передать через окно",})  // укажи тестовые данные
     public void Test(String city, String street, String house, String entrance, String door, String floor, String flat, String comment){
         HamAndCheese object2 = new HamAndCheese(driver);
         object2.sendCity(city);

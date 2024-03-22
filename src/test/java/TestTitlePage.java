@@ -1,3 +1,4 @@
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -5,7 +6,6 @@ import org.junit.jupiter.params.provider.CsvSource;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 public class TestTitlePage {
@@ -13,14 +13,13 @@ public class TestTitlePage {
 
     @BeforeEach
     public void before() {
-        //System.setProperty("webdriver.chrome.driver", "C:\\Users\\mamee\\Downloads\\chromedriver.exe");
+        //System.setProperty("webdriver.chrome.driver", "C:\\Users\\mamee\\Downloads\\chromedriver.exe"); // укажите путь к chromedriver.exe
+        WebDriverManager.chromedriver().setup();
         ChromeOptions option = new ChromeOptions();
-
         option.addArguments("--incognito");
         driver = new ChromeDriver(option);
         driver.manage().window().maximize();
         driver.get(TitlePage.URL);
-        
     }
 
     @AfterEach

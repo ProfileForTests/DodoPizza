@@ -5,7 +5,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+
 
 public class TitlePage {
     private WebDriver driver;
@@ -16,9 +16,7 @@ public class TitlePage {
 
     public static final String URL = "https://dodopizza.ru/";
 
-    private By boxCity = By.xpath("//*[@class='locality-selector-popup']");
     private By sendCityField = By.xpath("//*[@class='locality-selector-popup__search-input input']");
-    //private By titleText = By.xpath("//*[@id='react-app']/header/div[1]/div/span/span");
     private By titleText = By.xpath("//*[@class='header__about-slogan']");
     private By buttonPizza = By.xpath("//*[@class='sc-1c0ft0g-0 fPUrRB sc-1uavg9b-7 jzmaFx' and text() = 'Пиццы']");
 

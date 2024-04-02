@@ -44,4 +44,3 @@ public class TestTitlePage {
         object2.orderComparison();
     }
 }
-//"Екатеринбург, улица Репина, 5, 2, 2, 2, 2, Не тороплюсь"

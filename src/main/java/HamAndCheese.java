@@ -1,9 +1,7 @@
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
 import java.time.Duration;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 public class HamAndCheese extends TitlePage {
@@ -18,7 +16,6 @@ public class HamAndCheese extends TitlePage {
     private By pizzaHamAndCheeseField = By.xpath("//*[@title='Ветчина и сыр']");
     private By blockOrderPizza = By.xpath("/html/body/div[3]/div/div[2]/div/div");
     private By buttonNutritionalValue = By.xpath("/html/body/div[3]/div/div[2]/div/div/div[2]/div[1]/div/div/div[1]/div/div[1]/div/div/button");
-    //private By buttonNutritionalValue = By.xpath("//button[@type='button' and @class='sc-1f9df4k-0 GFPGv']");
     private By blockNutritionalValue = By.xpath("//*[@class='sc-6k321-0 dEgNfL sc-13bk731-2 etEOJD tooltip']");
     private By smallSizePizza = By.xpath("//*[@data-testid='menu__pizza_size_Маленькая']");
     private By middleSizePizza = By.xpath("//*[@data-testid='menu__pizza_size_Средняя']");
@@ -131,22 +128,13 @@ public class HamAndCheese extends TitlePage {
         elements.sendKeys(city, street, house);
         new WebDriverWait(driver, Duration.ofSeconds(100))
                 .until(ExpectedConditions.visibilityOfElementLocated(blockListAdress));
-        driver.findElement(currentAdress).click();
-        /*driver.findElement(blockListAdress).click();
-        driver.findElement(blockListAdress).sendKeys(Keys.ARROW_DOWN, Keys.ENTER);*/
+        driver.findElement(blockListAdress).click();
     }
 
     public void endOrder() {
         new WebDriverWait(driver, Duration.ofSeconds(100))
                 .until(ExpectedConditions.elementToBeClickable(buttonAddAfterAdress));
         driver.findElement(buttonAddAfterAdress).click();
-    }
-
-    public void checkPopUpNotification() {
-        WebElement window = driver.findElement(popUpWindow);
-        new WebDriverWait(driver, Duration.ofSeconds(100))
-                .until(ExpectedConditions.visibilityOfElementLocated(popUpWindow));
-        assertTrue(window.isDisplayed());
     }
 
     public void orderComparison() {

@@ -33,14 +33,14 @@ public class TestTitlePage {
         object2.sendCity(city);
         String elementTitle = object2.checkTitleWebsite();
         assertEquals("Доставка пиццы " + city, elementTitle);
-        object2.clickPizzaHamAndCheese();
-        object2.waitLoadImagePizza();
-        object2.checkNutritionalValue();
-        object2.checkSmallSizePizza();
-        object2.checkMiddleSizePizza();
-        object2.totalAmountWithAttributs();
-        object2.addressOrder(city, street, house, entrance, door, floor, flat, comment);
-        object2.endOrder();
-        object2.orderComparison();
+        object2.clickPizzaHamAndCheese()
+                .waitLoadImagePizza()
+                .checkNutritionalValue()
+                .checkSmallSizePizza()
+                .checkMiddleSizePizza()
+                .totalAmountWithAttributs()
+                .addressOrder(city, street, house, entrance, door, floor, flat, comment)
+                .endOrder()
+                .orderComparison();
     }
 }

@@ -150,28 +150,3 @@ public class HamAndCheese extends TitlePage {
         return getTextPizza.getText();
     }
 }
-
-/*
-public HamAndCheese checkAttributsMiddleSizePizza() {
-    WebElement middle = driver.findElement(middleSizePizza);
-    middle.click();
-    WebElement traditionalMiddle = driver.findElement(traditionalField);
-    WebElement thinMiddle = driver.findElement(thinField);
-    assertAll(
-            () -> assertTrue(traditionalMiddle.isEnabled(), "Кпонка 'Традиционное' не кликабельна"),
-            () -> assertTrue(thinMiddle.isEnabled(), "Кпонка 'Тонкое' не кликабельна")
-    );
-    return this;
-}*/
-
-/*public HamAndCheese checkAttributsMiddleSizePizza() {
-        WebElement middle = driver.findElement(middleSizePizza);
-        middle.click();
-        WebElement traditionalMiddle = driver.findElement(traditionalField);
-        WebElement thinMiddle = driver.findElement(thinField);
-        assertAll(
-                () -> assertTrue(traditionalMiddle.isEnabled(), "Кпонка 'Традиционное' не кликабельна"),
-                () -> assertTrue(thinMiddle.isEnabled(), "Кпонка 'Тонкое' не кликабельна")
-        );
-        return this;
-    }*/

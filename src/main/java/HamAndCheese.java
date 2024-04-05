@@ -2,7 +2,6 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
-import static org.junit.jupiter.api.Assertions.*;
 
 public class HamAndCheese extends TitlePage {
 
@@ -35,12 +34,10 @@ public class HamAndCheese extends TitlePage {
     private By floorField = By.xpath("//*[@id='animated-input-4']");
     private By flatField = By.xpath("//*[@id='animated-input-5']");
     private By commentField = By.xpath("//*[@id='animated-input-6']");
-    private By currentAdress = By.xpath("//*[@class='item__title' and text() = 'Москва, улица Павла Корчагина, 3']/parent::li");
     private By buttonAddAfterAdress = By.xpath("//*[@data-testid='add_or_save_spinner_button']");
-    private By popUpWindow = By.xpath("//*[@class='sc-1lz859j-1 DktGv notification-enter-done']");
     private By orderPizza = By.xpath("//*[@class='sc-1b7shmc-5 jNWDBI' and text() = 'Ветчина и сыр']");
     private By cart = By.xpath("//button[@data-testid='navigation__cart']");
-    private By blockCart = By.xpath("//*[@class='sc-1gxjiqu-0 hdUjND']");
+    private By blockCart = By.xpath("//*[@data-testid='cart__button_next']");
 
     public HamAndCheese clickPizzaHamAndCheese() {
         new WebDriverWait(driver, Duration.ofSeconds(300))
@@ -57,66 +54,58 @@ public class HamAndCheese extends TitlePage {
         return this;
     }
 
-    public HamAndCheese checkNutritionalValue() {
+    public String checkNutritionalValue() {
         new WebDriverWait(driver, Duration.ofSeconds(100))
                 .until(ExpectedConditions.elementToBeClickable(buttonNutritionalValue));
         driver.findElement(buttonNutritionalValue).click();
         new WebDriverWait(driver, Duration.ofSeconds(100))
                 .until(ExpectedConditions.visibilityOfElementLocated(blockNutritionalValue));
-        String blockWithParametrs = driver.findElement(blockNutritionalValue).getText();
-        assertAll(
-                () -> assertTrue(blockWithParametrs.contains("Энерг"), "Не содержит 'Энерг'"),
-                () -> assertTrue(blockWithParametrs.contains("Белки"), "Не содержит 'Белки'"),
-                () -> assertTrue(blockWithParametrs.contains("Жиры"), "Не содержит 'Жиры'"),
-                () -> assertTrue(blockWithParametrs.contains("Углеводы"), "Не содержит 'Углеводы'"),
-                () -> assertTrue(blockWithParametrs.contains("Вес"), "Не содержит 'Вес'"),
-                () -> assertTrue(blockWithParametrs.contains("Диаметр"), "Не содержит 'Диаметр'")
-        );
-        driver.findElement(buttonNutritionalValue).click();
-        return this;
+        WebElement blockWithParametrs = driver.findElement(blockNutritionalValue);
+        return blockWithParametrs.getText();
     }
 
-    public HamAndCheese checkSmallSizePizza() {
+    public WebElement getLocatorThinField(){
+        WebElement thin = driver.findElement(thinField);
+        return thin;
+    }
+
+    public WebElement getLocatorTraditionalField(){
+        WebElement traditional = driver.findElement(traditionalField);
+        return traditional;
+    }
+
+    public HamAndCheese checkAttributsSmallSizePizza() {
         driver.findElement(smallSizePizza).click();
-        assertNotEquals(thinField, thinFieldDisabled);
         return this;
     }
 
-    public HamAndCheese checkMiddleSizePizza() {
-        WebElement middle = driver.findElement(middleSizePizza);
-        middle.click();
-        WebElement traditionalMiddle = driver.findElement(traditionalField);
-        WebElement thinMiddle = driver.findElement(thinField);
-        assertAll(
-                () -> assertTrue(traditionalMiddle.isEnabled()),
-                () -> assertTrue(thinMiddle.isEnabled())
-        );
+    public HamAndCheese checkAttributsMiddleSizePizza() {
+        driver.findElement(middleSizePizza).click();
         return this;
     }
 
-    public HamAndCheese checkBigSizePizza() {
+    public HamAndCheese checkAttributsBigSizePizza() {
         driver.findElement(bigeSizePizza).click();
-        WebElement traditionalMiddle = driver.findElement(traditionalField);
-        WebElement thinMiddle = driver.findElement(thinField);
-        assertAll(
-                () -> assertTrue(traditionalMiddle.isEnabled()),
-                () -> assertTrue(thinMiddle.isEnabled())
-        );
         return this;
     }
 
-    // проверка на обновление суммы при добавлении дополнительного ингридиента
-    public HamAndCheese totalAmountWithAttributs() {
+    public int getTotalDefaultAmount(){
         WebElement price = driver.findElement(currentTotalPrice);
         int startingPrice = Integer.parseInt(price.getText());
+        return startingPrice;
+    }
+    public int getSelectAttributs(){
         driver.findElement(priceMocarella).click();
         WebElement cheese = driver.findElement(priceMocarella);
         int cheesePrice = Integer.parseInt(cheese.getText());
-        int endPrice = Integer.parseInt(price.getText());
-        assertEquals(startingPrice + cheesePrice, endPrice);
-        return this;
+        return cheesePrice;
     }
 
+    public int getTotalAmountAfterSelectAttributs(){
+        WebElement price = driver.findElement(currentTotalPrice);
+        int endPrice = Integer.parseInt(price.getText());
+        return endPrice;
+    }
     public HamAndCheese setBlockHowAdress() {
         driver.findElement(buttonAddToCart).click();
         new WebDriverWait(driver, Duration.ofSeconds(100))
@@ -147,16 +136,42 @@ public class HamAndCheese extends TitlePage {
         return this;
     }
 
-    public HamAndCheese orderComparison() {
+    public String orderComparison() {
         new WebDriverWait(driver, Duration.ofSeconds(100))
                 .until(ExpectedConditions.invisibilityOfElementLocated(blockHowAdress));
         new WebDriverWait(driver, Duration.ofSeconds(100))
                 .until(ExpectedConditions.invisibilityOfElementLocated(blockOrderPizza));
-        driver.findElement(cart).click();
         new WebDriverWait(driver, Duration.ofSeconds(100))
+                .until(ExpectedConditions.elementToBeClickable(cart));
+        driver.findElement(cart).click();
+        new WebDriverWait(driver, Duration.ofSeconds(200))
                 .until(ExpectedConditions.visibilityOfElementLocated(blockCart));
-        String getTextPizza = driver.findElement(orderPizza).getText();
-                assertEquals("Ветчина и сыр", getTextPizza);
-        return this;
+        WebElement getTextPizza = driver.findElement(orderPizza);
+        return getTextPizza.getText();
     }
 }
+
+/*
+public HamAndCheese checkAttributsMiddleSizePizza() {
+    WebElement middle = driver.findElement(middleSizePizza);
+    middle.click();
+    WebElement traditionalMiddle = driver.findElement(traditionalField);
+    WebElement thinMiddle = driver.findElement(thinField);
+    assertAll(
+            () -> assertTrue(traditionalMiddle.isEnabled(), "Кпонка 'Традиционное' не кликабельна"),
+            () -> assertTrue(thinMiddle.isEnabled(), "Кпонка 'Тонкое' не кликабельна")
+    );
+    return this;
+}*/
+
+/*public HamAndCheese checkAttributsMiddleSizePizza() {
+        WebElement middle = driver.findElement(middleSizePizza);
+        middle.click();
+        WebElement traditionalMiddle = driver.findElement(traditionalField);
+        WebElement thinMiddle = driver.findElement(thinField);
+        assertAll(
+                () -> assertTrue(traditionalMiddle.isEnabled(), "Кпонка 'Традиционное' не кликабельна"),
+                () -> assertTrue(thinMiddle.isEnabled(), "Кпонка 'Тонкое' не кликабельна")
+        );
+        return this;
+    }*/

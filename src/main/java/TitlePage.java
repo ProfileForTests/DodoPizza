@@ -17,10 +17,11 @@ public class TitlePage {
 
     private By sendCityField = By.xpath("//*[@class='locality-selector-popup__search-input input']");
     private By titleText = By.xpath("//*[@class='header__about-slogan']");
-    public void sendCity(String city) {
+    public TitlePage sendCity(String city) {
         new WebDriverWait(driver, Duration.ofSeconds(100))
                 .until(ExpectedConditions.elementToBeClickable(sendCityField));
         driver.findElement(sendCityField).sendKeys(city, Keys.ENTER);
+        return this;
     }
 
     public String checkTitleWebsite() {

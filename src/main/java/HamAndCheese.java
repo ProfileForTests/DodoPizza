@@ -3,6 +3,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 
+
 public class HamAndCheese extends TitlePage {
 
     private WebDriver driver;
@@ -20,8 +21,8 @@ public class HamAndCheese extends TitlePage {
     private By middleSizePizza = By.xpath("//*[@data-testid='menu__pizza_size_Средняя']");
     private By bigeSizePizza = By.xpath("//*[@data-testid='menu__pizza_size_Большая']");
     private By traditionalField = By.xpath("//*[@class='sc-1rpjq4r-2 fkoocK' and text() = 'Традиционное']");
-    private By thinField = By.xpath("//*[@class='sc-1rpjq4r-2 fkoocK' and text() = 'Тонкое']");
-    private By thinFieldDisabled = By.xpath("/html/body/div[3]/div/div[2]/div/div/div[2]/div[1]/div/div/div[1]/div/div[4]/div[2]/label[2]");
+    private By thinField = By.xpath("//*[@data-disabled='false' and @class='sc-1rpjq4r-2 fkoocK' and text()='Тонкое']");
+    private By thinFieldDisabled = By.xpath("//*[@data-disabled='true' and @class='sc-1rpjq4r-2 fkoocK' and text()='Тонкое']");
     private By currentTotalPrice = By.xpath("//button[@data-testid='button_add_to_cart']//span[@class='money__value']");
     private By priceMocarella = By.xpath("/html/body/div[3]/div/div[2]/div/div/div[2]/div[1]/div/div/div[1]/div/div[4]/div[3]/div/section/button[2]/span/span[1]");
     private By buttonAddToCart = By.xpath("//button[@data-testid='button_add_to_cart']");
@@ -35,9 +36,13 @@ public class HamAndCheese extends TitlePage {
     private By flatField = By.xpath("//*[@id='animated-input-5']");
     private By commentField = By.xpath("//*[@id='animated-input-6']");
     private By buttonAddAfterAdress = By.xpath("//*[@data-testid='add_or_save_spinner_button']");
-    private By orderPizza = By.xpath("//*[@class='sc-1b7shmc-5 jNWDBI' and text() = 'Ветчина и сыр']");
-    private By cart = By.xpath("//button[@data-testid='navigation__cart']");
-    private By blockCart = By.xpath("//*[@data-testid='cart__button_next']");
+    private By orderPizza = By.xpath("//*[@class='sc-1b7shmc-5 jNWDBI']");
+    private By cart = By.xpath("//*[@data-testid='navigation__cart']");
+    private By buttonNextOrder = By.xpath("//*[@data-testid='cart__button_next']");
+    private By numberField = By.xpath("//*[@data-testid='checkout-form__phone-input']");
+    private By sendToCode = By.xpath("//*[@data-testid='login_submit_button']");
+    private By firstCellCode = By.xpath("//*[@data-id='0']");
+
 
     public HamAndCheese clickPizzaHamAndCheese() {
         new WebDriverWait(driver, Duration.ofSeconds(300))
@@ -61,17 +66,20 @@ public class HamAndCheese extends TitlePage {
         new WebDriverWait(driver, Duration.ofSeconds(100))
                 .until(ExpectedConditions.visibilityOfElementLocated(blockNutritionalValue));
         WebElement blockWithParametrs = driver.findElement(blockNutritionalValue);
+        driver.findElement(buttonNutritionalValue).click();
         return blockWithParametrs.getText();
     }
 
     public WebElement getLocatorThinField(){
-        WebElement thin = driver.findElement(thinField);
-        return thin;
+        return driver.findElement(thinField);
+    }
+
+    public WebElement getLocatorThinFieldDisable(){
+        return driver.findElement(thinFieldDisabled);
     }
 
     public WebElement getLocatorTraditionalField(){
-        WebElement traditional = driver.findElement(traditionalField);
-        return traditional;
+        return driver.findElement(traditionalField);
     }
 
     public HamAndCheese checkAttributsSmallSizePizza() {
@@ -143,35 +151,11 @@ public class HamAndCheese extends TitlePage {
                 .until(ExpectedConditions.invisibilityOfElementLocated(blockOrderPizza));
         new WebDriverWait(driver, Duration.ofSeconds(100))
                 .until(ExpectedConditions.elementToBeClickable(cart));
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         driver.findElement(cart).click();
         new WebDriverWait(driver, Duration.ofSeconds(200))
-                .until(ExpectedConditions.visibilityOfElementLocated(blockCart));
+                .until(ExpectedConditions.visibilityOfElementLocated(buttonNextOrder));
         WebElement getTextPizza = driver.findElement(orderPizza);
         return getTextPizza.getText();
     }
 }
-
-/*
-public HamAndCheese checkAttributsMiddleSizePizza() {
-    WebElement middle = driver.findElement(middleSizePizza);
-    middle.click();
-    WebElement traditionalMiddle = driver.findElement(traditionalField);
-    WebElement thinMiddle = driver.findElement(thinField);
-    assertAll(
-            () -> assertTrue(traditionalMiddle.isEnabled(), "Кпонка 'Традиционное' не кликабельна"),
-            () -> assertTrue(thinMiddle.isEnabled(), "Кпонка 'Тонкое' не кликабельна")
-    );
-    return this;
-}*/
-
-/*public HamAndCheese checkAttributsMiddleSizePizza() {
-        WebElement middle = driver.findElement(middleSizePizza);
-        middle.click();
-        WebElement traditionalMiddle = driver.findElement(traditionalField);
-        WebElement thinMiddle = driver.findElement(thinField);
-        assertAll(
-                () -> assertTrue(traditionalMiddle.isEnabled(), "Кпонка 'Традиционное' не кликабельна"),
-                () -> assertTrue(thinMiddle.isEnabled(), "Кпонка 'Тонкое' не кликабельна")
-        );
-        return this;
-    }*/

@@ -29,7 +29,7 @@ public class TestTitlePage {
     @ParameterizedTest
     @CsvSource({"Москва , улица Павла Корчагина , 3, 1, 1, 1, 1, Можно передать через окно",
             "Екатеринбург, улица Репина, 5, 2, 2, 2, 2, Не тороплюсь"})
-    public void Test(String city, String street, String house, String entrance, String door, String floor, String flat, String comment){
+    public void Test(String city, String street, String house, String entrance, String door, String floor, String flat, String comment) {
 
         HamAndCheese object2 = new HamAndCheese(driver);
 
@@ -55,20 +55,20 @@ public class TestTitlePage {
 
         //проверка недоступности выбора тонокого теста
         object2.checkAttributsSmallSizePizza();
-        assertNotEquals(object2.getLocatorThinField(), object2.getLocatorTraditionalField(), "Доступен выбор тонкого теста, что является ошибкой");
+        assertTrue(object2.getLocatorThinFieldDisable().isDisplayed(), "Доступен выбор тонкого теста, что является ошибкой");
 
         //проверка доступности выбора тонкого и традиционного теста
         object2.checkAttributsBigSizePizza();
         assertAll(
-                () -> assertTrue(object2.getLocatorThinField().isEnabled(), "Кпонка 'Традиционное' не кликабельна"),
-                () -> assertTrue(object2.getLocatorTraditionalField().isEnabled(), "Кпонка 'Тонкое' не кликабельна")
+                () -> assertTrue(object2.getLocatorThinField().isDisplayed(), "Кпонка 'Традиционное' не кликабельна"),
+                () -> assertTrue(object2.getLocatorTraditionalField().isDisplayed(), "Кпонка 'Тонкое' не кликабельна")
         );
 
         //проверка доступности выбора тонкого и традиционного теста
         object2.checkAttributsMiddleSizePizza();
         assertAll(
-                () -> assertTrue(object2.getLocatorThinField().isEnabled(), "Кпонка 'Традиционное' не кликабельна"),
-                () -> assertTrue(object2.getLocatorTraditionalField().isEnabled(), "Кпонка 'Тонкое' не кликабельна")
+                () -> assertTrue(object2.getLocatorThinField().isDisplayed(), "Кпонка 'Традиционное' не кликабельна"),
+                () -> assertTrue(object2.getLocatorTraditionalField().isDisplayed(), "Кпонка 'Тонкое' не кликабельна")
         );
 
         // проверка рассчета стоимости продукта после добавления новых ингридиентов

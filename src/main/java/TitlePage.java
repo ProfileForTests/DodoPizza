@@ -1,7 +1,4 @@
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
@@ -17,6 +14,7 @@ public class TitlePage {
 
     private By sendCityField = By.xpath("//*[@class='locality-selector-popup__search-input input']");
     private By titleText = By.xpath("//*[@class='header__about-slogan']");
+
     public TitlePage sendCity(String city) {
         new WebDriverWait(driver, Duration.ofSeconds(100))
                 .until(ExpectedConditions.elementToBeClickable(sendCityField));

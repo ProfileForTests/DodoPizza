@@ -27,5 +27,6 @@ public class TitlePage {
                 .until(ExpectedConditions.visibilityOfElementLocated(titleText));
         WebElement elementTitle = driver.findElement(titleText);
         return elementTitle.getText();
+
     }
 }

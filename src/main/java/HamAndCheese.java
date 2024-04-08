@@ -39,10 +39,6 @@ public class HamAndCheese extends TitlePage {
     private By orderPizza = By.xpath("//*[@class='sc-1b7shmc-5 jNWDBI']");
     private By cart = By.xpath("//*[@data-testid='navigation__cart']");
     private By buttonNextOrder = By.xpath("//*[@data-testid='cart__button_next']");
-    private By numberField = By.xpath("//*[@data-testid='checkout-form__phone-input']");
-    private By sendToCode = By.xpath("//*[@data-testid='login_submit_button']");
-    private By firstCellCode = By.xpath("//*[@data-id='0']");
-
 
     public HamAndCheese clickPizzaHamAndCheese() {
         new WebDriverWait(driver, Duration.ofSeconds(300))

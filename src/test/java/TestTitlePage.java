@@ -83,5 +83,6 @@ public class TestTitlePage {
         // проверка отображения заказа в корзине
         String elementOrderComparison = object2.orderComparison();
         assertEquals("Ветчина и сыр", elementOrderComparison, "Заказанной пиццы нет в корзине");
+
     }
 }

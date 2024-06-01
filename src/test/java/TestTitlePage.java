@@ -38,7 +38,6 @@ public class TestTitlePage {
         String elementTitle = object2.checkTitleWebsite();
         assertEquals("Доставка пиццы " + city, elementTitle, "Выбранный город не совпадает со значением титульника");
 
-
         object2.clickPizzaHamAndCheese()
                 .waitLoadImagePizza();
 

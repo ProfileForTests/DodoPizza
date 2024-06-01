@@ -16,7 +16,7 @@ public class HamAndCheese extends TitlePage {
     private By pizzaHamAndCheeseField = By.xpath("//*[@title='Ветчина и сыр']");
     private By blockOrderPizza = By.xpath("/html/body/div[3]/div/div[2]/div/div");
     private By buttonNutritionalValue = By.xpath("/html/body/div[3]/div/div[2]/div/div/div[2]/div[1]/div/div/div[1]/div/div[1]/div/div/button");
-    private By blockNutritionalValue = By.xpath("//*[@class='sc-6k321-0 dEgNfL sc-13bk731-2 etEOJD tooltip']");
+    private By blockNutritionalValue = By.xpath("//*[@class='sc-6k321-0 dEgNfL sc-13bk731-2 qbUYj tooltip']");
     private By smallSizePizza = By.xpath("//*[@data-testid='menu__pizza_size_Маленькая']");
     private By middleSizePizza = By.xpath("//*[@data-testid='menu__pizza_size_Средняя']");
     private By bigeSizePizza = By.xpath("//*[@data-testid='menu__pizza_size_Большая']");
